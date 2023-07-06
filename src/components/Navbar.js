@@ -144,23 +144,24 @@ export default function Navbar() {
                     </Badge>
                 </IconButton>
                 <p>Messages</p>
-            </MenuItem>
-            <MenuItem>
-                <IconButton
-                    size="large"
-                    aria-label="show 17 new notifications"
-                    color="inherit"
-                >
-                    <Badge badgeContent={17} color="error">
-                        <NotificationsIcon />
-                    </Badge>
-                </IconButton>
-                <p>Notifications</p>
-            </MenuItem>
+            </MenuItem> */
+    <MenuItem>
+        <IconButton
+            size="large"
+            aria-label="show 17 new notifications"
+            color="inherit"
+        >
 
-        </Menu>
-    );
- */
+            <Badge badgeContent={17} color="error">
+                <AddShoppingCartIcon />
+            </Badge>
+        </IconButton>
+        <p>cart items</p>
+    </MenuItem>
+
+
+
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" sx={{ bgcolor: "white" }} >

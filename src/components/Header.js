@@ -1,23 +1,13 @@
-import React from 'react'
-// import { NavLink, Link } from 'react-router-dom'
+import React from "react";
+
 const Header = () => {
     return (
-        <div>
-            <Header className="header-top-strip py-3">
-                <div className="container-xxl">
-                    <div className="row">
-                        <div className="col-6">
-                            <p>Free S hopping Over $100 & Free Returnes</p>
-                        </div>
-                        <div className="col-6">
-                            <p className='text-end'>Ph.no:<a href="tel:+222344535">+91 32435456</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </Header>
+        <div className="ui fixed menu">
+            <div className="ui container center">
+                <h2>Shop</h2>
+            </div>
         </div>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;
