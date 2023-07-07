@@ -7,11 +7,13 @@ import Navbar from './components/Navbar';
 import ProductDetail from './components/ProductDetail';
 import Header from './components/Header';
 import ProductListing from './components/ProductListing';
-
-
-
+import { useSelector } from 'react-redux';
+import AddCart from './components/ViewDetail'
+import ViewDetail from './components/ViewDetail';
 
 const App = () => {
+  /*  const { user } = useSelector(state => state.data)
+   console.log(user) */
   return (
     <div>
       <BrowserRouter>
@@ -19,6 +21,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/productlisting" element={<ProductListing />} />
+          <Route path="/view/:id" element={<ViewDetail />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
         </Routes>

@@ -2,6 +2,7 @@ import { take, takeEvery, takeLatest, put, all, delay, fork, call } from "redux-
 import { loadUsersSuccess, loadUsersErorr, createUserSuccess, createUserErorr, DeleteUserSuccess, DeleteUserErorr, updateUserSuccess, updateUserErorr, showUserSuccess, showUserErorr } from "./action";
 import * as types from "./actionTypes";
 import { CreateUserAPI, DeleteUserAPI, ShowUserAPI, UpdateUserAPI, loadUsersAPI } from "./api";
+import axios from "axios";
 
 
 //===== LOAD USERS =====//
@@ -13,7 +14,9 @@ function* onLoadUsers() {
 function* onLoadUsersStartAsync() {
     try {
         const response = yield call(loadUsersAPI);
-        if (response.statusText === "OK") {
+        /*  const response = yield axios.get("https://fakestoreapi.com/products"); */
+        console.log(response)
+        if (response.statusText === "") {
             yield put(loadUsersSuccess(response.data))
         }
     }
@@ -81,7 +84,7 @@ function* onShowUserStartAsync({ payload }) {
         const response = yield call(ShowUserAPI, payload)
         console.log('show end')
         console.log(response)
-        if (response.statusText === 'OK') {
+        if (response.statusText === "") {
             yield put(showUserSuccess(response.data))
         }
     } catch (error) {

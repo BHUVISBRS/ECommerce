@@ -4,90 +4,106 @@ import ProductComponent from './ProductComponent';
 import { loadUsersAPI } from '../Redux/api';
 import { loadUsersStart, setProducts } from '../Redux/action';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Box, Button, CardActionArea, CardActions, Divider, Grid, Stack } from '@mui/material';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Box, Button, CardActionArea, Divider, Grid, Paper, Stack } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import CustomButton from './materialui/CustomButton';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Collapse from '@mui/material/Collapse';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import { red } from '@mui/material/colors';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { styled } from '@mui/material/styles';
+import oneButton from './materialui/OneButton';
+import OneButton from './materialui/OneButton';
 
 
+
+const ExpandMore = styled((props) => {
+    const { expand, ...other } = props;
+    return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+    }),
+}));
 
 export default function ProductListing() {
-    const [data, setData] = useState([]);
-    const [filter, setFilter] = useState(data);
-    const dispatch = useDispatch();
-    const items = useSelector((state) => state);
 
-    /*  useEffect(() => {
-         const fetchProducts = async () => {
-             const response = await axios.get("https://fakestoreapi.com/products");
-             setData(await response.clone.json())
-             setFilter(await response.json())
-             console.log(filter);
-         }
-         fetchProducts();
-     }, []);   */
+
+    const dispatch = useDispatch();
+    const { users } = useSelector(state => state.data)
+    console.log(users)
+
     useEffect(() => {
-        axios.get("https://fakestoreapi.com/products")
-            .then((response) => setFilter(response.data))
-        console.log(filter);
+        console.log('load user')
+        dispatch(loadUsersStart());
     }, [])
 
-    console.log(filter);
-
-
     return (
-        <div style={{ display: 'flex', }}>
+        <>
+            <Grid sx={{ flexGrow: 1, marginTop: 10 }} container spacing={2}>
+                <Grid item xs={12}>
+                    <Grid container justifyContent="center" sx={{ gap: 5 }} spacing={2}>
+                        {users.map((user, index) => {
+                            return (
+                                <Grid key={index} user>
+                                    <Card sx={{ width: 300 }}>
 
-            {filter.map((name) => {
-                return (
-                    <div className='container' style={{ display: 'flex', marginTop: 30 }}>
+                                        <CardMedia
+                                            component="img"
+                                            height="200"
+                                            image={user.image}
+                                            alt="dish image"
+                                        />
+                                        <CardContent>
+                                            <Typography sx={{ fontSize: 13 }} color="text.secondary">
+                                                {user.category}
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                price: ${user.price}
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
 
-                        <Card sx={{ maxWidth: 500 }} >
+                                            </Typography>
+                                        </CardContent>
+                                        <CardActions disableSpacing>
 
-                            <CardActionArea>
-                                <CardMedia
-                                    component="img"
-                                    height="330"
-                                    image={name.image}
-                                    alt="green iguana"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h8" component="div" sx={{ marginLeft: 2, letterSpacing: 1 }}>
-                                        {name.title}  </Typography>
-                                    <Typography gutterBottom variant="h8" component="div" sx={{ marginLeft: 2, letterSpacing: 1 }}>
-                                        $ {name.price}  </Typography>
-                                    <Typography gutterBottom variant="h8" component="div" sx={{ marginLeft: 2, letterSpacing: 1 }}>
-                                        {name.category}
-                                    </Typography>
-                                    <div style={{ marginLeft: 19 }}><hr /></div>
+                                            <Link to={`/view/${user.id}`} style={{ marginLeft: 20, textDecoration: 'none' }}>
+                                                <OneButton aria-label="add to favorites">
+                                                    View Detail
+                                                </OneButton>
 
-                                    <Typography variant="body2" color="text.secondary" sx={{ marginLeft: 2 }}>
-                                        <img src='TREE.png' alt='#' style={{ height: 35 }} />Comfy, All-Day Wearable
-                                    </Typography>
-                                    <CardActions>
-                                        <CustomButton size="small">ADD Cart</CustomButton>
-                                    </CardActions>
-                                </CardContent>
-                            </CardActionArea>
+                                            </Link>
 
-                        </Card>
-                    </div>
+                                        </CardActions>
 
+                                    </Card>
 
-                )
-            }
-            )
-
-            }
-        </div>
+                                </Grid>
+                            )
+                        })}
+                    </Grid>
+                </Grid>
+            </Grid >
+        </>
 
     )
 
 };
+
+
 
 
 

@@ -37,7 +37,7 @@ const BootstrapButton = styled(Button)({
 
 export default function CustomButton() {
   return (
-    <Stack spacing={2} direction="row">
+    <Stack spacing={4} direction="row">
       <BootstrapButton variant="contained" disableRipple>BUY</BootstrapButton>
       <BootstrapButton variant="contained" disableRipple>
         ADD CART
