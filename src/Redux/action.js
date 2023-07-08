@@ -102,3 +102,19 @@ export const showUserResClean = (error) => ({
     type: types.SHOW_USER_RES_CLEAN,
     payload: error,
 });
+
+
+//AddTOCart
+export const AddTOCart = (userId) => ({
+    type: types.ADDTO_CART_START,
+    payload: userId,
+});
+
+export const AddTOCartSuccess = (userId,user) => ({
+    type: types.ADDTO_CART_SUCCESS,
+    payload:{userId,user} 
+});
+export const AddTOCartError = (error) => ({
+    type: types.ADDTO_CART_ERROR,
+    payload: error,
+});

@@ -5,9 +5,8 @@ const initaialState = {
     loading: false,
     error: null,
     response: "",
-    cart: [],
-
-
+    cart:[],
+   
 }
 const usersReducer = (state = initaialState, action) => {
     switch (action.type) {
@@ -42,7 +41,6 @@ const usersReducer = (state = initaialState, action) => {
                 loading: true,
             };
         case types.CREATE_USER_SUCCESS:
-
             return {
                 ...state,
                 loading: false,
@@ -143,18 +141,48 @@ const usersReducer = (state = initaialState, action) => {
                 error: null
             }
 
-            //Add to cart
-            case types.ADD_TO_CART:
+      
+
+        default:
+            return state;
+
+    }
+}
+    
+// const initaialState2 = {
+//    cart: [],
+//     loading: false,
+//     error: null,
+//     response: "",
+    
+// }
+// ############ ADDTO_CART_START#########################//
+const CartReducer = (state = initaialState, action) => {
+    switch (action.type) {
+            case types.ADDTO_CART_START:
                 return {
                     ...state,
-                    cart: [...state.cart, action.payload]
+                     Loading: false,
                 }
+        case types.ADDTO_CART_SUCCESS:
+                 return {
+                ...state,
+                loading: false,
+                cart: [...state.data],
+            };
+
+        case types.ADDTO_CART_ERROR:
+            return {
+                ...state,
+                error: action.payload,
+                loading: false,
+
+            };
+
         default:
             return state;
 
     }
 }
 
-
-
-export default usersReducer;
+export {usersReducer, CartReducer};

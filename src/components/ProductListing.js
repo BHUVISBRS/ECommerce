@@ -53,7 +53,7 @@ export default function ProductListing() {
 
     return (
         <>
-            <Grid sx={{ flexGrow: 1, marginTop: 10 }} container spacing={2}>
+            <Grid sx={{ flexGrow: 1, marginTop: 10 }} container spacing={2} className='outerbox'>
                 <Grid item xs={12}>
                     <Grid container justifyContent="center" sx={{ gap: 5 }} spacing={2}>
                         {users.map((user, index) => {

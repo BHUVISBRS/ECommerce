@@ -1,7 +1,7 @@
 import { take, takeEvery, takeLatest, put, all, delay, fork, call } from "redux-saga/effects";
-import { loadUsersSuccess, loadUsersErorr, createUserSuccess, createUserErorr, DeleteUserSuccess, DeleteUserErorr, updateUserSuccess, updateUserErorr, showUserSuccess, showUserErorr } from "./action";
+import { loadUsersSuccess, loadUsersErorr, createUserSuccess, createUserErorr, DeleteUserSuccess, DeleteUserErorr, updateUserSuccess, updateUserErorr, showUserSuccess, showUserErorr, AddTOCartSuccess, AddTOCartError } from "./action";
 import * as types from "./actionTypes";
-import { CreateUserAPI, DeleteUserAPI, ShowUserAPI, UpdateUserAPI, loadUsersAPI } from "./api";
+import { AddTOCartAPI, CreateUserAPI, DeleteUserAPI, ShowUserAPI, UpdateUserAPI, loadUsersAPI } from "./api";
 import axios from "axios";
 
 
@@ -119,8 +119,30 @@ function* onDeleteUserStartAsync(userid) {
 }
 
 
+//======================================== AddToCART ===============================================//
 
-const userSagas = [fork(onLoadUsers), fork(onCreateUser), fork(onDeleteUser), fork(onUpdateUser), fork(onShowUser)];
+
+function* AddToCART() {
+
+    yield takeEvery(types.ADDTO_CART_START, AddToCARTStartSync)
+
+
+}
+function* AddToCARTStartSync({ payload }) {
+    try {
+        const response = yield call(AddTOCartAPI, payload.userId, payload.user)
+        if (response.statusText === " ") {
+            yield put(AddTOCartSuccess(response))
+        }
+    }
+
+    catch (error) {
+        yield put(AddTOCartError(error.response.data))
+    }
+}
+
+
+const userSagas = [fork(onLoadUsers), fork(onCreateUser), fork(onDeleteUser), fork(onUpdateUser), fork(onShowUser),fork(AddToCART)];
 
 export default function* rootSaga() {
     yield all([...userSagas]);
