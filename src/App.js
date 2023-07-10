@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 
 import ViewDetail from './components/ViewDetail';
 import AddCart from './components/AddCart';
+import MensCloth from './components/MensCloth';
 
 const App = () => {
   /*  const { user } = useSelector(state => state.data)
@@ -22,7 +23,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/productlisting" element={<ProductListing />} />
-          <Route path="/view/:id" element={<ViewDetail />} />
+         <Route path="/view/:id" element={<ViewDetail />} />
             <Route path="/addcart/:id" element={<AddCart />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />

@@ -5,7 +5,8 @@ const initaialState = {
     loading: false,
     error: null,
     response: "",
-    cart:[],
+  
+   
    
 }
 const usersReducer = (state = initaialState, action) => {
@@ -26,6 +27,28 @@ const usersReducer = (state = initaialState, action) => {
                 loading: false,
             };
         case types.LOAD_USERS_ERORR:
+            return {
+                ...state,
+                error: action.payload,
+                loading: false,
+
+            };
+
+             // ############ LOAD_USERS_START2#########################//
+
+        case types.LOAD_USERS_START2:
+            return {
+                ...state,
+                loading: true,
+            };
+        case types.LOAD_USERS_SUCCESS2:
+            return {
+                ...state,
+                users: [...action.payload],
+
+                loading: false,
+            };
+        case types.LOAD_USERS_ERORR2:
             return {
                 ...state,
                 error: action.payload,
@@ -141,24 +164,25 @@ const usersReducer = (state = initaialState, action) => {
                 error: null
             }
 
-      
-
+  
         default:
             return state;
-
-    }
 }
-    
-// const initaialState2 = {
-//    cart: [],
-//     loading: false,
-//     error: null,
-//     response: "",
-    
-// }
+}
+
+
+const initaialState2 = {
+    cart: [],
+    loading: false,
+    error: null,
+    response: "",
+  
+} 
+   
 // ############ ADDTO_CART_START#########################//
-const CartReducer = (state = initaialState, action) => {
+const CartReducer = (state = initaialState2, action) => {
     switch (action.type) {
+
             case types.ADDTO_CART_START:
                 return {
                     ...state,
@@ -168,7 +192,8 @@ const CartReducer = (state = initaialState, action) => {
                  return {
                 ...state,
                 loading: false,
-                cart: [...state.data],
+                  response: action.payload,
+        cart: [...action.payload],
             };
 
         case types.ADDTO_CART_ERROR:
@@ -181,8 +206,8 @@ const CartReducer = (state = initaialState, action) => {
 
         default:
             return state;
-
-    }
+}
 }
 
-export {usersReducer, CartReducer};
+
+export {usersReducer,CartReducer};

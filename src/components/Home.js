@@ -64,7 +64,7 @@ export default function Home() {
                     </CardContent>
                     <Stack spacing={2} direction="row">
                         <BootstrapButton sx={{ marginLeft: 4, letterSpacing: 3 }} variant="contained" disableRipple onClick={() => { navigate("/productlisting") }}>SHOP WOMEN </BootstrapButton>
-                        <BootstrapButton sx={{ marginLeft: 4, letterSpacing: 3 }} variant="contained" disableRipple>
+                        <BootstrapButton sx={{ marginLeft: 4, letterSpacing: 3 }} variant="contained" disableRipple onClick={() => { navigate("/MensCloth") }}>
                             SHOP MEN
                         </BootstrapButton>
                     </Stack>

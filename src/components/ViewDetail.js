@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector, } from "react-redux";
 import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { Grid, MutatingDots } from "react-loader-spinner";
-import {showUserResClean, showUserStart } from "../Redux/action";
+import {AddTOCart, showUserResClean, showUserStart } from "../Redux/action";
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -36,10 +36,10 @@ function ViewDetail() {
         };
     }, [id]);
     
+     
     const { users } = useSelector((state) => state.data);
     // const user = users.find((user) => user.id === id);
-    console.log(users);
-
+  
 
     return (
         <>
@@ -71,9 +71,9 @@ function ViewDetail() {
                         <CardActions disableSpacing>
                             <div className="buttonlink" style={{ marginLeft: 120, textDecoration: 'none' }}>
                                 <Link to={`/addcart/${user.id}`} style={{ textDecoration: 'none' }} >
-                                    <CustomButton >
-
-                                    </CustomButton>
+                                    <Button >
+                                         ADD
+                                    </Button>
 
                                 </Link>
                             </div>

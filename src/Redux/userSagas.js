@@ -1,7 +1,7 @@
 import { take, takeEvery, takeLatest, put, all, delay, fork, call } from "redux-saga/effects";
-import { loadUsersSuccess, loadUsersErorr, createUserSuccess, createUserErorr, DeleteUserSuccess, DeleteUserErorr, updateUserSuccess, updateUserErorr, showUserSuccess, showUserErorr, AddTOCartSuccess, AddTOCartError } from "./action";
+import { loadUsersSuccess, loadUsersErorr, createUserSuccess, createUserErorr, DeleteUserSuccess, DeleteUserErorr, updateUserSuccess, updateUserErorr, showUserSuccess, showUserErorr, AddTOCartSuccess, AddTOCartError, loadUsersSuccess2, loadUsersErorr2 } from "./action";
 import * as types from "./actionTypes";
-import { AddTOCartAPI, CreateUserAPI, DeleteUserAPI, ShowUserAPI, UpdateUserAPI, loadUsersAPI } from "./api";
+import { AddTOCartAPI, CreateUserAPI, DeleteUserAPI, ShowUserAPI, UpdateUserAPI, loadUsersAPI, loadUsersAPI2 } from "./api";
 import axios from "axios";
 
 
@@ -24,6 +24,28 @@ function* onLoadUsersStartAsync() {
         yield put(loadUsersErorr(error.response.data))
     }
 }
+
+
+//===== LOAD USERS2 =====//
+
+function* onLoadUsers2() {
+    yield takeEvery(types.LOAD_USERS_START2, onLoadUsersStartAsync2);
+}
+
+function* onLoadUsersStartAsync2() {
+    try {
+        const response = yield call(loadUsersAPI2);
+        /*  const response = yield axios.get("https://fakestoreapi.com/products"); */
+        console.log(response)
+        if (response.statusText === "") {
+            yield put(loadUsersSuccess2(response.data))
+        }
+    }
+    catch (error) {
+        yield put(loadUsersErorr2(error.response.data))
+    }
+}
+
 
 //===== CreateUser =====//
 
@@ -124,15 +146,18 @@ function* onDeleteUserStartAsync(userid) {
 
 function* AddToCART() {
 
-    yield takeEvery(types.ADDTO_CART_START, AddToCARTStartSync)
+    yield takeLatest(types.ADDTO_CART_START, AddToCARTStartSync)
 
 
 }
 function* AddToCARTStartSync({ payload }) {
     try {
-        const response = yield call(AddTOCartAPI, payload.userId, payload.user)
+        const response = yield call(AddTOCartAPI, payload)
+      
+        console.log(response);
         if (response.statusText === " ") {
             yield put(AddTOCartSuccess(response))
+                 console.log(response);
         }
     }
 
@@ -142,7 +167,7 @@ function* AddToCARTStartSync({ payload }) {
 }
 
 
-const userSagas = [fork(onLoadUsers), fork(onCreateUser), fork(onDeleteUser), fork(onUpdateUser), fork(onShowUser),fork(AddToCART)];
+const userSagas = [fork(onLoadUsers), fork(onCreateUser), fork(onDeleteUser), fork(onUpdateUser), fork(onShowUser),fork(AddToCART),fork(onLoadUsers2)];
 
 export default function* rootSaga() {
     yield all([...userSagas]);
