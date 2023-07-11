@@ -174,18 +174,14 @@ function* cardtoAddDataSync() {
 function* AddToCART() {
   yield takeLatest(types.ADDTO_CART_START, AddToCARTStartSync);
 }
+
 function* AddToCARTStartSync({ payload }) {
   try {
-    /*   const response1 = yield axios.get(
-      "https://fakestoreapi.com/products/category/women'sclothing"
-    );
-    console.log(response1); */
     const response = yield call(AddTOCartAPIShow, payload);
-
     console.log(response);
-    if (response.statusText === "Created") {
-      console.log("end");
+    if (response.statusText === " ") {
       yield put(AddTOCartSuccess(response));
+      console.log(response);
     }
   } catch (error) {
     yield put(AddTOCartError(error.response.data));

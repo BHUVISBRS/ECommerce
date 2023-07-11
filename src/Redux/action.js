@@ -107,8 +107,9 @@ export const showUserResClean = (error) => ({
 });
 
 //GetCartSTART//
-export const GetCartSTART = () => ({
+export const GetCartSTART = (user) => ({
   type: types.CART_ADDTO_CART_START,
+  payload: user,
 });
 
 export const GetCartSuccess = (users) => ({

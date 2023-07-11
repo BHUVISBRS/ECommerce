@@ -49,6 +49,7 @@ const ExpandMore = styled((props) => {
 
 export default function ProductListing() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { users } = useSelector((state) => state.data);
 
   console.log(users);
@@ -57,6 +58,15 @@ export default function ProductListing() {
     console.log("load user");
     dispatch(loadUsersStart());
   }, []);
+  const { response } = useSelector((state) => state.data);
+  useEffect(() => {
+    if (response?.statusText === " ") {
+      console.log(response);
+      toast.success("created");
+      /* toast.success("created", response?.statusText); */
+      navigate("/addcart");
+    }
+  }, [response]);
 
   return (
     <>
@@ -91,18 +101,16 @@ export default function ProductListing() {
                       ></Typography>
                     </CardContent>
                     <CardActions disableSpacing>
-                      <Link to="/addcart">
-                        <Button
-                          style={{
-                            width: 100,
-                            backgroundColor: "black",
-                            color: "white",
-                          }}
-                          onClick={() => dispatch(AddTOCartStart(user))}
-                        >
-                          ADDtoCart
-                        </Button>
-                      </Link>
+                      <Button
+                        style={{
+                          width: 100,
+                          backgroundColor: "black",
+                          color: "white",
+                        }}
+                        onClick={() => dispatch(AddTOCartStart(user))}
+                      >
+                        ADDtoCart
+                      </Button>
                     </CardActions>
                   </Card>
                 </Grid>

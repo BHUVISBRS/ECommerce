@@ -41,15 +41,15 @@ const AddCart = () => {
   //     console.log("load user");
   //     dispatch(AddTOCart());
   //   }, []);
-  const { cart } = useSelector((state) => state.data);
-  console.log(cart);
+  /*  const { cart } = useSelector((state) => state.data);
+  console.log(cart); */
   const { response } = useSelector((state) => state.data);
   console.log(response);
-  useEffect(() => {
-    if (response?.statusText === "Created") {
-      toast.success(response?.statusText);
-    }
-  }, [response]);
+  //   useEffect(() => {
+  //     if (response?.statusText === "OK") {
+  //       toast.success(response);
+  //     }
+  //   }, [response]);
 
   return (
     <div>
