@@ -1,26 +1,32 @@
-
-import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { Button, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
-import { NavLink } from 'react-router-dom';
-import './Nav.css'
+import * as React from "react";
+import { styled, alpha } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import InputBase from "@mui/material/InputBase";
+import Badge from "@mui/material/Badge";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import MailIcon from "@mui/icons-material/Mail";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import MoreIcon from "@mui/icons-material/MoreVert";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import {
+  Button,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import "./Nav.css";
+import { useSelector } from "react-redux";
 
 // const Search = styled('div')(({ theme }) => ({
 //     position: 'relative',
@@ -63,52 +69,52 @@ import './Nav.css'
 // }));
 
 export default function Navbar() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const handleProfileMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    const handleMobileMenuClose = () => {
-        setMobileMoreAnchorEl(null);
-    };
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
 
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-        handleMobileMenuClose();
-    };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
 
-    const handleMobileMenuOpen = (event) => {
-        setMobileMoreAnchorEl(event.currentTarget);
-    };
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
 
-    const menuId = 'primary-search-account-menu';
-    const renderMenu = (
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-        </Menu>
-    );
+  const menuId = "primary-search-account-menu";
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
+  );
 
-    /* const mobileMenuId = 'primary-search-account-menu-mobile';
+  /* const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
         <Menu
             anchorEl={mobileMoreAnchorEl}
@@ -145,116 +151,96 @@ export default function Navbar() {
                 </IconButton>
                 <p>Messages</p>
             </MenuItem> */
-    <MenuItem>
-        <IconButton
-            size="large"
-            aria-label="show 17 new notifications"
-            color="inherit"
+
+  const result = useSelector((state) => state.data);
+  console.log("cart data", result);
+  <MenuItem>
+    <IconButton
+      size="large"
+      aria-label="show 17 new notifications"
+      color="inherit"
+    >
+      <Badge badgeContent={result.length} color="error">
+        <AddShoppingCartIcon />
+      </Badge>
+    </IconButton>
+    <p>cart items</p>
+  </MenuItem>;
+
+  const navigate = useNavigate();
+
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" sx={{ bgcolor: "white" }}>
+        <Typography
+          sx={{
+            bgcolor: "black",
+            display: "flex",
+            justifyContent: "center",
+            fontSize: 11,
+            padding: 1.5,
+          }}
         >
+          Introducing M0.0NSHOT, the world’s first net zero carbon shoe.
+          Arriving Spring 2024. Learn More.
+        </Typography>
+        <Toolbar sx={{ height: 60 }}>
+          <Button
+            sx={{ color: "black" }}
+            onClick={() => {
+              navigate("/menscloth");
+            }}
+          >
+            MEN
+          </Button>
+          <Button
+            sx={{ color: "black" }}
+            onClick={() => {
+              navigate("/productlisting");
+            }}
+          >
+            WOMEN
+          </Button>
+          <Button sx={{ color: "black" }}>KIDS</Button>
 
-            <Badge badgeContent={17} color="error">
+          <Button sx={{ color: "black" }}>SALE</Button>
+
+          <Link to="/">
+            <div>
+              <img
+                style={{
+                  width: 140,
+                  height: 55,
+                  marginLeft: 270,
+                  marginTop: 2,
+                }}
+                src="logo.png"
+                alt="logo"
+              ></img>
+            </div>
+          </Link>
+          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            {/************ AddShoppingCartIcon *****************/}
+            <Link to="/addcart">
+              <IconButton size="large" aria-label="show 17 new notifications">
                 <AddShoppingCartIcon />
-            </Badge>
-        </IconButton>
-        <p>cart items</p>
-    </MenuItem>
-
-
-
-
-    return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ bgcolor: "white" }} >
-                <Typography sx={{ bgcolor: 'black', display: 'flex', justifyContent: 'center', fontSize: 11, padding: 1.5 }}>Introducing M0.0NSHOT, the world’s first net zero carbon shoe. Arriving Spring 2024. Learn More.</Typography>
-                <Toolbar sx={{ height: 60 }}>
-
-                    <Button sx={{ color: 'black' }}>MEN</Button>
-                    <Button sx={{ color: 'black' }}>WOMEN</Button>
-                    <Button sx={{ color: 'black' }}>KIDS</Button>
-                    <Button sx={{ color: 'black' }}>SOCKS</Button>
-                    <Button sx={{ color: 'black' }}>SALE</Button>
-
-
-                    <div><img style={{ width: 146, height: 62, marginLeft: 200, marginTop: 2 }} src='logo.png' alt='logo'></img></div>
-
-                    <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-
-
-                        <Button sx={{ color: 'black' }}>SUSTAINABILITY</Button>
-                        <Button sx={{ color: 'black' }}>RETURN</Button>
-                        <Button sx={{ color: 'black' }}>STORES</Button>
-
-
-
-                        {/**************** SearchIcon *****************/}
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-
-                        >
-                            <SearchIcon />
-                        </IconButton>
-
-                        {/************ ACCOUNT *****************/}
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-
-                        >
-                            <AccountCircle />
-                        </IconButton>
-
-                        {/************ HelpOutlineIcon *****************/}
-                        <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-
-                        >
-                            <HelpOutlineIcon />
-                        </IconButton>
-
-
-                        {/************ AddShoppingCartIcon *****************/}
-                        <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-
-                        >
-                            <AddShoppingCartIcon />
-                        </IconButton>
-
-                    </Box>
-                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="show more"
-
-                            aria-haspopup="true"
-                            onClick={handleMobileMenuOpen}
-                            color="inherit"
-                        >
-                            <MoreIcon />
-                        </IconButton>
-                    </Box>
-                </Toolbar>
-            </AppBar>
-
-        </Box>
-    );
+              </IconButton>
+            </Link>
+          </Box>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MoreIcon />
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
 }
-
-
-
-
-
-
-

@@ -64,7 +64,7 @@ export default function Home() {
                     </CardContent>
                     <Stack spacing={2} direction="row">
                         <BootstrapButton sx={{ marginLeft: 4, letterSpacing: 3 }} variant="contained" disableRipple onClick={() => { navigate("/productlisting") }}>SHOP WOMEN </BootstrapButton>
-                        <BootstrapButton sx={{ marginLeft: 4, letterSpacing: 3 }} variant="contained" disableRipple onClick={() => { navigate("/MensCloth") }}>
+                        <BootstrapButton sx={{ marginLeft: 4, letterSpacing: 3 }} variant="contained" disableRipple onClick={() => { navigate("/menscloth") }}>
                             SHOP MEN
                         </BootstrapButton>
                     </Stack>
@@ -72,7 +72,7 @@ export default function Home() {
                 </CardMedia>
 
             </Card>
-            <Typography variant="h4" sx={{ marginLeft: 65, paddingTop: 14, paddingBottom: 7 }}>Shop By Category</Typography>
+            <Typography variant="h4" sx={{ marginLeft: 65, paddingTop: 3, paddingBottom: 7 }}>Shop By Category</Typography>
 
             <ShopCategary />
 
