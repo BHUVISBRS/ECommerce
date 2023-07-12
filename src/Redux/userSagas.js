@@ -38,6 +38,7 @@ import {
   loadUsersAPI2,
 } from "./api";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 //===== LOAD USERS =====//
 
@@ -77,40 +78,6 @@ function* onLoadUsersStartAsync2() {
   }
 }
 
-//===== CreateUser =====//
-
-function* onCreateUser() {
-  yield takeLatest(types.CREATE_USER_START, onCreateUserStartAsync);
-}
-
-function* onCreateUserStartAsync({ payload }) {
-  try {
-    const response = yield call(CreateUserAPI, payload);
-    console.log(response);
-    if (response.statusText === "Created") {
-      yield put(createUserSuccess(response));
-    }
-  } catch (error) {
-    yield put(createUserErorr(error.response.data));
-  }
-}
-
-//======================================== UpdateUser ===============================================//
-
-function* onUpdateUser() {
-  yield takeEvery(types.UPDATE_USER_START, onUpdateUserStartAsync);
-}
-function* onUpdateUserStartAsync({ payload }) {
-  try {
-    const response = yield call(UpdateUserAPI, payload.userInfo, payload.user);
-    if (response.statusText === "OK") {
-      yield put(updateUserSuccess(response));
-    }
-  } catch (error) {
-    yield put(updateUserErorr(error.response.data));
-  }
-}
-
 //======================================== ShowUser ===============================================//
 
 function* onShowUser() {
@@ -133,18 +100,16 @@ function* onShowUserStartAsync({ payload }) {
 //======================================== DeleteUser ===============================================//
 
 function* onDeleteUser() {
-  while (true) {
-    const { payload: userid } = yield take(types.DELETE_USER_START);
-    yield call(onDeleteUserStartAsync, userid);
-  }
+  yield takeLatest(types.DELETE_USER_START, onDeleteUserStartAsync);
 }
 
 function* onDeleteUserStartAsync(userid) {
   try {
     const response = yield call(DeleteUserAPI, userid);
-    console.log(response);
-    if (response.statusText === "OK") {
-      yield put(DeleteUserSuccess(userid));
+    console.log("delete sucess", response);
+    if (response?.statusText === "OK") {
+      yield put(DeleteUserSuccess(response.statusText));
+      console.log("status", response?.statusText);
     }
   } catch (error) {
     yield put(DeleteUserErorr(error.response.data));
@@ -179,20 +144,21 @@ function* AddToCARTStartSync({ payload }) {
   try {
     const response = yield call(AddTOCartAPIShow, payload);
     console.log(response);
-    if (response.statusText === " ") {
-      yield put(AddTOCartSuccess(response));
-      console.log(response);
+    if (response.statusText === "Created") {
+      yield put(AddTOCartSuccess(response.statusText));
+      console.log("success", response.statusText);
     }
   } catch (error) {
-    yield put(AddTOCartError(error.response.data));
+    console.log("error occured");
+    yield put(AddTOCartError(error.response.cart));
   }
 }
 
 const userSagas = [
   fork(onLoadUsers),
-  fork(onCreateUser),
+
   fork(onDeleteUser),
-  fork(onUpdateUser),
+
   fork(onShowUser),
   fork(AddToCART),
   fork(onLoadUsers2),

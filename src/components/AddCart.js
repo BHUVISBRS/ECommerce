@@ -1,41 +1,39 @@
 import React, { useEffect } from "react";
-import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
   AddTOCart,
+  DeleteUserStart,
   GetCartSTART,
   showUserResClean,
   showUserStart,
 } from "../Redux/action";
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Grid,
-  Typography,
-} from "@mui/material";
-import { useParams } from "react-router-dom";
-import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
+import { Button } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import "./table.css";
+import { toast } from "react-hot-toast";
 
-const AddCart = () => {
-  /*    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(showUserStart(id));
-        return () => {
-            dispatch(showUserResClean());
-        };
-    }, [id]);
-     */
-  const dispatch = useDispatch();
+function AddCart() {
   const { id } = useParams();
-  const { carts } = useSelector((state) => state.cart);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  console.log(carts);
+  const { carts, response } = useSelector((state) => state.cart);
+
+  console.log("carts called", carts);
+  console.log("delete response", response);
   useEffect(() => {
     console.log("GetCartSTART user");
     dispatch(GetCartSTART());
   }, []);
+
+  useEffect(() => {
+    if (response === "OK") {
+      console.log(response);
+      toast.success(response);
+    }
+  }, [response]);
 
   //   useEffect(() => {
   //     console.log("load user");
@@ -43,17 +41,21 @@ const AddCart = () => {
   //   }, []);
   /*  const { cart } = useSelector((state) => state.data);
   console.log(cart); */
-  const { response } = useSelector((state) => state.data);
-  console.log(response);
-  //   useEffect(() => {
-  //     if (response?.statusText === "OK") {
-  //       toast.success(response);
-  //     }
-  //   }, [response]);
+  // const { response } = useSelector((state) => state.data);
+  // console.log(response);
+  // useEffect(() => {
+  //   if (response?.statusText === "OK") {
+  //     toast.success(response);
+  //     navigate("/addcart");
+  //   }
+  // }, [response]);
+  function postDelete(id) {
+    dispatch(DeleteUserStart(id));
+  }
 
   return (
-    <div>
-      <table className="table">
+    <div className="tablecontainer">
+      <table>
         <thead>
           <tr>
             <th>ID</th>
@@ -74,10 +76,15 @@ const AddCart = () => {
                 </td>
                 <td>${item.price}</td>
                 <td>
-                  <Grid item xs={10}>
-                    <DeleteForeverRoundedIcon />
-                    <Typography></Typography>
-                  </Grid>
+                  <Button tyle={{ backgroundColor: "skyblue" }}>
+                    <FontAwesomeIcon icon={faPlus} />
+                  </Button>
+                  <Button>
+                    <FontAwesomeIcon icon={faMinus} />
+                  </Button>
+                  <Button onClick={() => postDelete(item.id)}>
+                    <FontAwesomeIcon icon={faTrash} />
+                  </Button>
                 </td>
               </tr>
             );
@@ -86,6 +93,6 @@ const AddCart = () => {
       </table>
     </div>
   );
-};
+}
 
 export default AddCart;

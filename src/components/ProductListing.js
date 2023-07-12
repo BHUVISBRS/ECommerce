@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ProductComponent from "./ProductComponent";
+
 import { loadUsersAPI } from "../Redux/api";
-import { AddTOCartStart, loadUsersStart, setProducts } from "../Redux/action";
+import {
+  AddTOCartStart,
+  loadUsersStart,
+  setProducts,
+  showUserResClean,
+} from "../Redux/action";
 import axios from "axios";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
@@ -33,7 +38,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { styled } from "@mui/material/styles";
 import oneButton from "./materialui/OneButton";
 import OneButton from "./materialui/OneButton";
-import { ADDTO_CART_START } from "../Redux/actionTypes";
+import { ADDTO_CART_START, SHOW_USER_RES_CLEAN } from "../Redux/actionTypes";
 import { toast } from "react-hot-toast";
 
 const ExpandMore = styled((props) => {
@@ -50,26 +55,21 @@ const ExpandMore = styled((props) => {
 export default function ProductListing() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { users } = useSelector((state) => state.data);
-
-  console.log(users);
+  const { users, response } = useSelector((state) => state.data);
 
   useEffect(() => {
     console.log("load user");
     dispatch(loadUsersStart());
   }, []);
-  const { response } = useSelector((state) => state.data);
+
   useEffect(() => {
-    if (response?.statusText === " ") {
-      console.log(response);
-      toast.success("created");
-      /* toast.success("created", response?.statusText); */
-      navigate("/addcart");
+    if (response === "Created") {
+      toast.success(response);
     }
   }, [response]);
 
   return (
-    <>
+    <div>
       <Grid
         sx={{ flexGrow: 1, marginTop: 10 }}
         container
@@ -119,6 +119,6 @@ export default function ProductListing() {
           </Grid>
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 }

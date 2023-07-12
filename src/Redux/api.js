@@ -7,9 +7,9 @@ export const loadUsersAPI = () => {
 export const loadUsersAPI2 = () => {
   return axios.get("https://fakestoreapi.com/products/category/men's clothing");
 };
-export const ShowUserAPI = (userid) => {
+export const ShowUserAPI = (users) => {
   return axios.get(
-    `https://fakestoreapi.com/products/category/women's clothing${userid}`
+    `https://fakestoreapi.com/products/category/women's clothing${users}`
   );
 };
 export const AddTOCartAPI = () => {
@@ -21,10 +21,12 @@ export const AddTOCartAPIShow = (user) => {
 };
 
 export const CreateUserAPI = async (user) =>
-  await axios.post("'https://fakestoreapi.com/products/categories'", user);
+  await axios.post("https://fakestoreapi.com/products/categories", user);
 
 export const UpdateUserAPI = async (userInfo, user) =>
   axios.put(`https://fakestoreapi.com/products/${userInfo}`, user);
 
 export const DeleteUserAPI = async (userid) =>
-  await axios.delete(`https://fakestoreapi.com/products/${userid}`);
+  await axios.delete(
+    `https://6485eb9ba795d24810b77ae5.mockapi.io/users/${userid}`
+  );

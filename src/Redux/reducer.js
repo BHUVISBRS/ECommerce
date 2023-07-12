@@ -5,7 +5,6 @@ const initaialState = {
   loading: false,
   error: null,
   response: "",
-  cart: [],
 };
 const usersReducer = (state = initaialState, action) => {
   switch (action.type) {
@@ -51,66 +50,25 @@ const usersReducer = (state = initaialState, action) => {
         loading: false,
       };
 
-    // ############ CREATE_USER_START#########################//
+    // ############ ADDTO_CART_START#########################//
 
-    case types.CREATE_USER_START:
+    case types.ADDTO_CART_START:
       return {
         ...state,
-        loading: true,
+        Loading: false,
       };
-    case types.CREATE_USER_SUCCESS:
+    case types.ADDTO_CART_SUCCESS:
+      console.log(action.payload, "reducer");
       return {
         ...state,
         loading: false,
         response: action.payload,
       };
 
-    case types.CREATE_USER_ERROR:
+    case types.ADDTO_CART_ERROR:
       return {
         ...state,
-        error: action.payload,
-        loading: false,
-      };
-
-    // ############ UPDATE_USER_START#########################//
-
-    case types.UPDATE_USER_START:
-      return {
-        ...state,
-        loading: true,
-      };
-    case types.UPDATE_USER_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        users: [...state.data],
-      };
-
-    case types.UPDATE_USER_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-        loading: false,
-      };
-    // ############ DELETE_USER_START#########################//
-
-    case types.DELETE_USER_START:
-      return {
-        ...state,
-        loading: true,
-      };
-
-    case types.DELETE_USER_SUCCESS:
-      return {
-        ...state,
-        users: state.users.filter((user) => user.id !== action.payload),
-        loading: false,
-      };
-
-    case types.DELETE_USER_ERROR:
-      return {
-        ...state,
-        error: action.payload,
+        error: [action.payload],
         loading: false,
       };
 
@@ -126,7 +84,6 @@ const usersReducer = (state = initaialState, action) => {
       console.log("show user success reducer");
       return {
         ...state,
-
         users: action.payload,
         Loading: false,
       };
@@ -140,35 +97,12 @@ const usersReducer = (state = initaialState, action) => {
       };
 
     // ############ SHOW_USER_RES_CLEAN#########################//
-
     case types.SHOW_USER_RES_CLEAN:
       console.log("show user res clean reducer");
       return {
         ...state,
         users: [],
         error: null,
-      };
-
-    // ############ ADDTO_CART_START#########################//
-
-    case types.ADDTO_CART_START:
-      return {
-        ...state,
-        Loading: false,
-      };
-    case types.ADDTO_CART_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-
-        cart: [...action.payload],
-      };
-
-    case types.ADDTO_CART_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-        loading: false,
       };
 
     default:

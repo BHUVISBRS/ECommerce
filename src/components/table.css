@@ -1,0 +1,30 @@
+.tablecontainer {
+
+    display: flex;
+    justify-content: center;
+align-items: center;
+   margin-top: 60px;
+
+    
+}
+
+table {
+ /*    border: 2px solid forestgreen; */
+    width: 1040px;
+    height: 500px;
+ 
+  
+
+}
+
+th {
+    width: 500px;
+   background-color: rgb(38, 226, 226);
+    height:70px;
+   
+    align-items: center;
+   
+}
+td{
+    align-items: center;
+}

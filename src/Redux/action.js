@@ -30,44 +30,6 @@ export const loadUsersErorr2 = (error) => ({
   payload: error,
 });
 
-//CREATE_USER_START//
-
-export const createUserStart = (user) => ({
-  type: types.CREATE_USER_START,
-  payload: user,
-});
-
-export const createUserSuccess = (payload) => ({
-  type: types.CREATE_USER_SUCCESS,
-  payload: payload,
-});
-
-export const createUserErorr = (error) => ({
-  type: types.CREATE_USER_ERROR,
-  payload: error,
-});
-
-//UPDATE USER//
-
-export const updateUserStart = (userInfo, user) => ({
-  type: types.UPDATE_USER_START,
-  payload: { userInfo, user },
-});
-
-export const updateUserSuccess = (userInfo) => {
-  console.log("edit user success action");
-  toast.success("User updated successfully");
-  return {
-    type: types.UPDATE_USER_SUCCESS,
-    payload: userInfo,
-  };
-};
-
-export const updateUserErorr = (error) => ({
-  type: types.UPDATE_USER_ERROR,
-  payload: error,
-});
-
 //Deleteuser
 
 export const DeleteUserStart = (userid) => ({
@@ -107,9 +69,8 @@ export const showUserResClean = (error) => ({
 });
 
 //GetCartSTART//
-export const GetCartSTART = (user) => ({
+export const GetCartSTART = () => ({
   type: types.CART_ADDTO_CART_START,
-  payload: user,
 });
 
 export const GetCartSuccess = (users) => ({
