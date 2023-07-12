@@ -103,9 +103,9 @@ function* onDeleteUser() {
   yield takeLatest(types.DELETE_USER_START, onDeleteUserStartAsync);
 }
 
-function* onDeleteUserStartAsync(userid) {
+function* onDeleteUserStartAsync({ payload }) {
   try {
-    const response = yield call(DeleteUserAPI, userid);
+    const response = yield call(DeleteUserAPI, payload);
     console.log("delete sucess", response);
     if (response?.statusText === "OK") {
       yield put(DeleteUserSuccess(response.statusText));
