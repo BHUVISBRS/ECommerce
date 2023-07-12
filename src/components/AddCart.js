@@ -19,18 +19,25 @@ function AddCart() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { carts, response } = useSelector((state) => state.cart);
+  const { carts, response, deleteLoading } = useSelector((state) => state.cart);
 
-  console.log("carts called", carts);
-  console.log("delete response", response);
+  // console.log("carts called", carts);
+  // console.log("delete response", response);
+  console.log("loading", deleteLoading);
   useEffect(() => {
+    if (deleteLoading) return;
     console.log("GetCartSTART user");
     dispatch(GetCartSTART());
-  }, []);
+  }, [dispatch, deleteLoading]);
+  // useEffect(() => {
+
+  //   console.log("GetCartSTART user");
+  //   dispatch(GetCartSTART());
+  // }, []);
 
   useEffect(() => {
     if (response === "OK") {
-      console.log(response);
+      console.log("delete response user", response);
       toast.success(response);
     }
   }, [response]);

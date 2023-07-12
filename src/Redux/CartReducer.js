@@ -4,7 +4,8 @@ const initaialState = {
   carts: [],
   loading: false,
   error: null,
-  response: "",
+  response2: "",
+  deleteLoading: false,
 };
 
 // ############ CART_ADDTO_CART_START#########################//
@@ -33,23 +34,33 @@ const CartReducer = (state = initaialState, action) => {
     case types.DELETE_USER_START:
       return {
         ...state,
-        loading: true,
+        deleteLoading: true,
       };
 
     case types.DELETE_USER_SUCCESS:
       console.log("delete the user", action.payload);
       return {
         ...state,
-        carts: state.carts.filter((item) => item.id !== action.payload),
+        /* carts: state.carts.filter((item) => item.id !== action.payload), */
         response: action.payload,
-        loading: false,
+        deleteLoading: false,
       };
 
     case types.DELETE_USER_ERROR:
       return {
         ...state,
         error: action.payload,
-        loading: false,
+        deleteLoading: false,
+      };
+
+    // ############ SHOW_USER_RES_CLEAN#########################//
+    case types.CARD_USER_RES_CLEAN:
+      console.log("show user res clean reducer");
+      return {
+        ...state,
+        carts: [],
+        error: null,
+        response2: null,
       };
 
     default:

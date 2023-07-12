@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadUsersAPI } from "../Redux/api";
 import {
   AddTOCartStart,
+  CartUserResClean,
   loadUsersStart,
   setProducts,
   showUserResClean,
@@ -55,16 +56,18 @@ const ExpandMore = styled((props) => {
 export default function ProductListing() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { users, response } = useSelector((state) => state.data);
+  const { users, response, deleteLoading } = useSelector((state) => state.data);
 
   useEffect(() => {
+    if (deleteLoading) return;
     console.log("load user");
     dispatch(loadUsersStart());
-  }, []);
+  }, [dispatch, deleteLoading]);
 
   useEffect(() => {
     if (response === "Created") {
-      toast.success(response);
+      toast.success("Added to cart");
+      dispatch(showUserResClean());
     }
   }, [response]);
 

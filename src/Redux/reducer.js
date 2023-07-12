@@ -5,6 +5,7 @@ const initaialState = {
   loading: false,
   error: null,
   response: "",
+  deleteLoading: false,
 };
 const usersReducer = (state = initaialState, action) => {
   switch (action.type) {
@@ -55,21 +56,21 @@ const usersReducer = (state = initaialState, action) => {
     case types.ADDTO_CART_START:
       return {
         ...state,
-        Loading: false,
+        deleteLoading: true,
       };
     case types.ADDTO_CART_SUCCESS:
       console.log(action.payload, "reducer");
       return {
         ...state,
-        loading: false,
+        deleteLoading: false,
         response: action.payload,
       };
 
     case types.ADDTO_CART_ERROR:
       return {
         ...state,
+        deleteLoading: false,
         error: [action.payload],
-        loading: false,
       };
 
     // ############ SHOW_USER_START#########################//
@@ -103,6 +104,7 @@ const usersReducer = (state = initaialState, action) => {
         ...state,
         users: [],
         error: null,
+        response: null,
       };
 
     default:

@@ -68,6 +68,11 @@ export const showUserResClean = (error) => ({
   payload: error,
 });
 
+export const CartUserResClean = (error) => ({
+  type: types.CARD_USER_RES_CLEAN,
+  payload: error,
+});
+
 //GetCartSTART//
 export const GetCartSTART = () => ({
   type: types.CART_ADDTO_CART_START,
