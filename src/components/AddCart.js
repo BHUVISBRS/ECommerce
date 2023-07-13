@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   AddTOCart,
+  CartUserResClean,
   DeleteUserStart,
   GetCartSTART,
   showUserResClean,
@@ -13,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./table.css";
 import { toast } from "react-hot-toast";
+import { ControlCameraTwoTone } from "@mui/icons-material";
 
 function AddCart() {
   const { id } = useParams();
@@ -29,36 +31,30 @@ function AddCart() {
     console.log("GetCartSTART user");
     dispatch(GetCartSTART());
   }, [dispatch, deleteLoading]);
-  // useEffect(() => {
-
-  //   console.log("GetCartSTART user");
-  //   dispatch(GetCartSTART());
-  // }, []);
 
   useEffect(() => {
     if (response === "OK") {
-      console.log("delete response user", response);
-      toast.success(response);
+      // console.log("cart removed success");
+      toast.success("cart removed success");
+      dispatch(CartUserResClean());
     }
   }, [response]);
 
-  //   useEffect(() => {
-  //     console.log("load user");
-  //     dispatch(AddTOCart());
-  //   }, []);
-  /*  const { cart } = useSelector((state) => state.data);
-  console.log(cart); */
-  // const { response } = useSelector((state) => state.data);
-  // console.log(response);
-  // useEffect(() => {
-  //   if (response?.statusText === "OK") {
-  //     toast.success(response);
-  //     navigate("/addcart");
-  //   }
-  // }, [response]);
   function postDelete(id) {
     dispatch(DeleteUserStart(id));
   }
+  /* const [counter, setCounter] = useState(0); */
+  // const [val, setVal] = useState();
+  // const handleClick1 = (id) => {
+  //   setCounter(counter + 1);
+  //   console.log(counter);
+  //   setVal((val = counter * id.price));
+  //   console.log("val", val);
+  // };
+
+  // const handleClick2 = () => {
+  //   setCounter(counter - 1);
+  // };
 
   return (
     <div className="tablecontainer">
@@ -81,14 +77,9 @@ function AddCart() {
                 <td>
                   <img src={item.image} style={{ width: 70, height: 70 }}></img>
                 </td>
-                <td>${item.price}</td>
+                <td>$price:{item.price}</td>
+
                 <td>
-                  <Button tyle={{ backgroundColor: "skyblue" }}>
-                    <FontAwesomeIcon icon={faPlus} />
-                  </Button>
-                  <Button>
-                    <FontAwesomeIcon icon={faMinus} />
-                  </Button>
                   <Button onClick={() => postDelete(item.id)}>
                     <FontAwesomeIcon icon={faTrash} />
                   </Button>

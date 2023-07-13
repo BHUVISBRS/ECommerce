@@ -1,30 +1,24 @@
 import {
-  take,
   takeEvery,
   takeLatest,
   put,
   all,
-  delay,
   fork,
   call,
 } from "redux-saga/effects";
 import {
   loadUsersSuccess,
   loadUsersErorr,
-  createUserSuccess,
-  createUserErorr,
   DeleteUserSuccess,
   DeleteUserErorr,
-  updateUserSuccess,
-  updateUserErorr,
-  showUserSuccess,
-  showUserErorr,
   AddTOCartSuccess,
   AddTOCartError,
   loadUsersSuccess2,
   loadUsersErorr2,
   GetCartSuccess,
   GetCartErorr,
+  MensCartSuccess,
+  MensCartError,
 } from "./action";
 import * as types from "./actionTypes";
 import {
@@ -32,6 +26,7 @@ import {
   AddTOCartAPIShow,
   CreateUserAPI,
   DeleteUserAPI,
+  MensCartAPI,
   ShowUserAPI,
   UpdateUserAPI,
   loadUsersAPI,
@@ -80,22 +75,22 @@ function* onLoadUsersStartAsync2() {
 
 //======================================== ShowUser ===============================================//
 
-function* onShowUser() {
-  yield takeEvery(types.SHOW_USER_START, onShowUserStartAsync);
-}
-function* onShowUserStartAsync({ payload }) {
-  try {
-    console.log("show start");
-    const response = yield call(ShowUserAPI, payload);
-    console.log("show end");
-    console.log(response);
-    if (response.statusText === "") {
-      yield put(showUserSuccess(response.data));
-    }
-  } catch (error) {
-    yield put(showUserErorr(error.response.data));
-  }
-}
+// function* onShowUser() {
+//   yield takeEvery(types.SHOW_USER_START, onShowUserStartAsync);
+// }
+// function* onShowUserStartAsync({ payload }) {
+//   try {
+//     console.log("show start");
+//     const response = yield call(ShowUserAPI, payload);
+//     console.log("show end");
+//     console.log(response);
+//     if (response.statusText === "") {
+//       yield put(showUserSuccess(response.data));
+//     }
+//   } catch (error) {
+//     yield put(showUserErorr(error.response.data));
+//   }
+// }
 
 //======================================== DeleteUser ===============================================//
 
@@ -142,27 +137,47 @@ function* AddToCART() {
 
 function* AddToCARTStartSync({ payload }) {
   try {
+    const name = yield call(AddTOCartAPIShow, payload);
+    console.log("is it", name);
+    if (name.statusText === "Created") {
+      yield put(AddTOCartSuccess(name.statusText));
+      console.log("success", name.statusText);
+    }
+  } catch (error) {
+    console.log("error occured");
+    yield put(AddTOCartError(error.name.statusText));
+  }
+}
+
+//======================================== MensCART ===============================================//
+
+function* MensCART() {
+  yield takeLatest(types.MEN_CART_START, MensCARTStartSync);
+}
+
+function* MensCARTStartSync({ payload }) {
+  try {
     const response = yield call(AddTOCartAPIShow, payload);
     console.log(response);
     if (response.statusText === "Created") {
-      yield put(AddTOCartSuccess(response.statusText));
+      yield put(MensCartSuccess(response.statusText));
       console.log("success", response.statusText);
     }
   } catch (error) {
     console.log("error occured");
-    yield put(AddTOCartError(error.response.cart));
+    yield put(MensCartError(error.response.cart));
   }
 }
-
 const userSagas = [
   fork(onLoadUsers),
 
   fork(onDeleteUser),
 
-  fork(onShowUser),
+  // fork(onShowUser),
   fork(AddToCART),
   fork(onLoadUsers2),
   fork(CardADDData),
+  fork(MensCART),
 ];
 
 export default function* rootSaga() {

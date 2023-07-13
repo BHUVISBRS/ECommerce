@@ -10,20 +10,18 @@ import AddCart from "./components/AddCart";
 const App = () => {
   /*  const { user } = useSelector(state => state.data)
    console.log(user) */
+  /*  console.log("hello", toast.success("hello")); */
   return (
     <div>
       <div>
         <Toaster />
       </div>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/productlisting" element={<ProductListing />} />
-          <Route path="/menscloth" element={<MensCloth />} />
-          <Route path="/addcart" element={<AddCart />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/productlisting" element={<ProductListing />} />
+        <Route path="/menscloth" element={<MensCloth />} />
+        <Route path="/addcart" element={<AddCart />} />
+      </Routes>
     </div>
   );
 };

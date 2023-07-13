@@ -107,3 +107,24 @@ export const AddTOCartError = (error) => ({
   type: types.ADDTO_CART_ERROR,
   payload: error,
 });
+
+
+//Mens Cart
+
+export const MensCartStart = (user) => {
+  console.warn("action is called", user);
+  return {
+    type: types.MEN_CART_START,
+    payload: user,
+  };
+};
+
+export const MensCartSuccess = (payload) => ({
+  type: types.MEN_CART_SUCCESS,
+  payload: payload,
+});
+
+export const MensCartError = (error) => ({
+  type: types.MEN_CART_ERROR,
+  payload: error,
+});

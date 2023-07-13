@@ -4,7 +4,7 @@ const initaialState = {
   carts: [],
   loading: false,
   error: null,
-  response2: "",
+  response: "",
   deleteLoading: false,
 };
 
@@ -60,7 +60,7 @@ const CartReducer = (state = initaialState, action) => {
         ...state,
         carts: [],
         error: null,
-        response2: null,
+        response: null,
       };
 
     default:

@@ -6,6 +6,7 @@ import {
   AddTOCartStart,
   CartUserResClean,
   loadUsersStart,
+  loadUsersStart2,
   setProducts,
   showUserResClean,
 } from "../Redux/action";
@@ -64,13 +65,6 @@ export default function ProductListing() {
     dispatch(loadUsersStart());
   }, [dispatch, deleteLoading]);
 
-  useEffect(() => {
-    if (response === "Created") {
-      toast.success("Added to cart");
-      dispatch(showUserResClean());
-    }
-  }, [response]);
-
   return (
     <div>
       <Grid
@@ -112,7 +106,7 @@ export default function ProductListing() {
                         }}
                         onClick={() => dispatch(AddTOCartStart(user))}
                       >
-                        ADDtoCart
+                        {buttonText}
                       </Button>
                     </CardActions>
                   </Card>

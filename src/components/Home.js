@@ -26,6 +26,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import ProductListing from "./ProductListing";
 import { useDispatch } from "react-redux";
 import { showUserResClean, showUserStart } from "../Redux/action";
+import Navbar from "./Navbar";
+
 const BootstrapButton = styled(Button)({
   boxShadow: "none",
   textTransform: "none",
@@ -78,12 +80,9 @@ export default function Home() {
             <BootstrapButton
               sx={{ marginLeft: 4, letterSpacing: 3 }}
               variant="contained"
-              disableRipple
-              onClick={() => {
-                navigate("/productlisting");
-              }}
+              onClick={() => navigate("/productlisting")}
             >
-              SHOP WOMEN{" "}
+              SHOP women
             </BootstrapButton>
             <BootstrapButton
               sx={{ marginLeft: 4, letterSpacing: 3 }}
