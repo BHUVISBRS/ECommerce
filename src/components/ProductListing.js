@@ -106,7 +106,7 @@ export default function ProductListing() {
                         }}
                         onClick={() => dispatch(AddTOCartStart(user))}
                       >
-                        {buttonText}
+                        AddCart
                       </Button>
                     </CardActions>
                   </Card>
