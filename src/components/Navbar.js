@@ -1,45 +1,20 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import {
-  Button,
-  Container,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material";
+import { Button } from "@mui/material";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Nav.css";
 import { useSelector } from "react-redux";
-import { Search } from "@mui/icons-material";
+import { Container, InputAdornment, TextField } from "@mui/material";
+import { useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -49,32 +24,12 @@ export default function Navbar() {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
 
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("sm")]: {
-        width: "12ch",
-        "&:focus": {
-          width: "20ch",
-        },
-      },
-    },
-  }));
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   const { carts } = useSelector((state) => state.cart);
   console.log("cart data", carts);
@@ -119,21 +74,37 @@ export default function Navbar() {
               ></img>
             </div>
           </Link>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
+          <Container sx={{ width: 100, height: 0.9 }}>
+            <TextField
+              id="search"
+              type="search"
+              label="Search"
+              value={searchTerm}
+              onChange={handleChange}
+              sx={{ width: 350 }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
-          </Search>
+          </Container>
 
-          <Box sx={{ flexGrow: 0.8 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ marginLeft: 1 }} />
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex", marginRight: 80, width: 20 },
+            }}
+          >
             {/************ AddShoppingCartIcon *****************/}
             <Link to="/addcart">
-              <Badge badgeContent={carts.length} color="error">
+              <Badge
+                badgeContent={carts.length}
+                color="error"
+                sx={{ height: 20 }}
+              >
                 <AddShoppingCartIcon />
               </Badge>
             </Link>

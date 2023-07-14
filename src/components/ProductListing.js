@@ -47,6 +47,7 @@ export default function ProductListing() {
       console.log(response);
     }
   }, [response]);
+  console.log("ccccc", users);
 
   function handleclick(user) {
     console.log("aaa", user);
@@ -97,7 +98,7 @@ export default function ProductListing() {
                         /* onClick={() => handleclick(user.id)} */
                       >
                         {console.log("user", user.id)}
-                        {console.log("ssss", user)}
+                        {console.log("cre", user)}
                         {response === "created" && user.id
                           ? "Added"
                           : "Add Cart"}

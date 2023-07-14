@@ -25,7 +25,7 @@ import ShopCategary from "./ShopCategary";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductListing from "./ProductListing";
 import { useDispatch } from "react-redux";
-import { showUserResClean, showUserStart } from "../Redux/action";
+import { GetCartSTART, showUserResClean, showUserStart } from "../Redux/action";
 import Navbar from "./Navbar";
 
 const BootstrapButton = styled(Button)({
@@ -54,6 +54,12 @@ export default function Home() {
   //       dispatch(showUserResClean());
   //     };
   //   }, [id]);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    console.log("load user");
+    dispatch(GetCartSTART());
+  }, [dispatch]);
   const navigate = useNavigate();
   return (
     <>
