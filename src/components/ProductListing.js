@@ -1,58 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { loadUsersAPI } from "../Redux/api";
 import {
   AddTOCartStart,
-  CartUserResClean,
+  GetCartSTART,
   loadUsersStart,
-  loadUsersStart2,
-  setProducts,
   showUserResClean,
 } from "../Redux/action";
-import axios from "axios";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import {
-  Box,
-  Button,
-  CardActionArea,
-  Divider,
-  Grid,
-  Paper,
-  Stack,
-} from "@mui/material";
-import { grey } from "@mui/material/colors";
-import CustomButton from "./materialui/CustomButton";
+
+import { useNavigate } from "react-router-dom";
+import { Button, Grid } from "@mui/material";
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { styled } from "@mui/material/styles";
-import oneButton from "./materialui/OneButton";
-import OneButton from "./materialui/OneButton";
-import { ADDTO_CART_START, SHOW_USER_RES_CLEAN } from "../Redux/actionTypes";
 import { toast } from "react-hot-toast";
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+// const ExpandMore = styled((props) => {
+//   const { expand, ...other } = props;
+//   return <IconButton {...other} />;
+// })(({ theme, expand }) => ({
+//   transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+//   marginLeft: "auto",
+//   transition: theme.transitions.create("transform", {
+//     duration: theme.transitions.duration.shortest,
+//   }),
+// }));
 
 export default function ProductListing() {
   const dispatch = useDispatch();
@@ -63,7 +37,22 @@ export default function ProductListing() {
     if (deleteLoading) return;
     console.log("load user");
     dispatch(loadUsersStart());
+    dispatch(GetCartSTART());
   }, [dispatch, deleteLoading]);
+
+  useEffect(() => {
+    if (response === "Created") {
+      toast.success("Added to cart");
+      dispatch(showUserResClean());
+      console.log(response);
+    }
+  }, [response]);
+
+  function handleclick(user) {
+    console.log("aaa", user);
+    console.log("ccccc", users);
+    users.filter(user);
+  }
 
   return (
     <div>
@@ -105,8 +94,13 @@ export default function ProductListing() {
                           color: "white",
                         }}
                         onClick={() => dispatch(AddTOCartStart(user))}
+                        /* onClick={() => handleclick(user.id)} */
                       >
-                        AddCart
+                        {console.log("user", user.id)}
+                        {console.log("ssss", user)}
+                        {response === "created" && user.id
+                          ? "Added"
+                          : "Add Cart"}
                       </Button>
                     </CardActions>
                   </Card>

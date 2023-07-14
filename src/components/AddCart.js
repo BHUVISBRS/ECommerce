@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  AddTOCart,
   CartUserResClean,
   DeleteUserStart,
   GetCartSTART,
-  showUserResClean,
-  showUserStart,
 } from "../Redux/action";
 import { Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
@@ -14,7 +11,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./table.css";
 import { toast } from "react-hot-toast";
-import { ControlCameraTwoTone } from "@mui/icons-material";
 
 function AddCart() {
   const { id } = useParams();
@@ -43,14 +39,15 @@ function AddCart() {
   function postDelete(id) {
     dispatch(DeleteUserStart(id));
   }
-  /* const [counter, setCounter] = useState(0); */
-  // const [val, setVal] = useState();
-  // const handleClick1 = (id) => {
-  //   setCounter(counter + 1);
-  //   console.log(counter);
-  //   setVal((val = counter * id.price));
-  //   console.log("val", val);
-  // };
+  const [counter, setCounter] = useState(0);
+  const [val, setVal] = useState();
+  const handleClick1 = (id) => {
+    console.log("id", id);
+    setCounter(counter + 1);
+    console.log(counter);
+    setVal((val = counter * id.price));
+    console.log("val", val);
+  };
 
   // const handleClick2 = () => {
   //   setCounter(counter - 1);
@@ -77,12 +74,17 @@ function AddCart() {
                 <td>
                   <img src={item.image} style={{ width: 70, height: 70 }}></img>
                 </td>
-                <td>$price:{item.price}</td>
+                <td>price:${item.price}</td>
 
                 <td>
                   <Button onClick={() => postDelete(item.id)}>
                     <FontAwesomeIcon icon={faTrash} />
                   </Button>
+                </td>
+                <td>
+                  {/*<Button onClick={() => handleClick1(item.id)}>
+                    {counter}
+            </Button>  */}
                 </td>
               </tr>
             );

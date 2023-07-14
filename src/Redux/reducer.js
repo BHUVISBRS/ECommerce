@@ -73,27 +73,6 @@ const usersReducer = (state = initaialState, action) => {
         error: [action.payload],
       };
 
-    // ############ MEN_CART_START#########################//
-
-    case types.MEN_CART_START:
-      return {
-        ...state,
-        deleteLoading: true,
-      };
-    case types.MEN_CART_SUCCESS:
-      console.log(action.payload, "reducer");
-      return {
-        ...state,
-        deleteLoading: false,
-        response: action.payload,
-      };
-
-    case types.MEN_CART_ERROR:
-      return {
-        ...state,
-        deleteLoading: false,
-        error: [action.payload],
-      };
     // ############ SHOW_USER_START#########################//
     case types.SHOW_USER_START:
       console.log("show user start reducer");
