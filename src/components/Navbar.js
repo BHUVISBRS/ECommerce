@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { Container, InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import LoginButton from "./materialui/LoginButton";
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -61,12 +62,15 @@ export default function Navbar() {
           <Button sx={{ color: "black" }}>SALE</Button> */}
 
           <Link to="/">
-            <div>
+            <div
+              style={{
+                marginLeft: 400,
+              }}
+            >
               <img
                 style={{
                   width: 140,
                   height: 55,
-                  marginLeft: 270,
                   marginTop: 2,
                 }}
                 src="logo.png"
@@ -74,7 +78,7 @@ export default function Navbar() {
               ></img>
             </div>
           </Link>
-          <Container sx={{ width: 100, height: 0.9 }}>
+          {/*    <Container sx={{ width: 100, height: 0.9 }}>
             <TextField
               id="search"
               type="search"
@@ -90,9 +94,10 @@ export default function Navbar() {
                 ),
               }}
             />
-          </Container>
+            </Container> */}
+          {/*  <LoginButton></LoginButton> */}
 
-          <Box sx={{ marginLeft: 1 }} />
+          <Box sx={{ marginLeft: 50 }} />
           <Box
             sx={{
               display: { xs: "none", md: "flex", marginRight: 80, width: 20 },

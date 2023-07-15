@@ -30,26 +30,26 @@ const usersReducer = (state = initaialState, action) => {
         loading: false,
       };
 
-    // ############ LOAD_USERS_START2#########################//
+    // // ############ LOAD_USERS_START2#########################//
 
-    case types.LOAD_USERS_START2:
-      return {
-        ...state,
-        loading: true,
-      };
-    case types.LOAD_USERS_SUCCESS2:
-      return {
-        ...state,
-        users: [...action.payload],
+    // case types.LOAD_USERS_START2:
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //   };
+    // case types.LOAD_USERS_SUCCESS2:
+    //   return {
+    //     ...state,
+    //     users: [...action.payload],
 
-        loading: false,
-      };
-    case types.LOAD_USERS_ERORR2:
-      return {
-        ...state,
-        error: action.payload,
-        loading: false,
-      };
+    //     loading: false,
+    //   };
+    // case types.LOAD_USERS_ERORR2:
+    //   return {
+    //     ...state,
+    //     error: action.payload,
+    //     loading: false,
+    /*      }; */
 
     // ############ ADDTO_CART_START#########################//
 
@@ -71,30 +71,6 @@ const usersReducer = (state = initaialState, action) => {
         ...state,
         deleteLoading: false,
         error: [action.payload],
-      };
-
-    // ############ SHOW_USER_START#########################//
-    case types.SHOW_USER_START:
-      console.log("show user start reducer");
-      return {
-        ...state,
-        Loading: true,
-      };
-
-    case types.SHOW_USER_SUCCESS:
-      console.log("show user success reducer");
-      return {
-        ...state,
-        users: action.payload,
-        Loading: false,
-      };
-
-    case types.SHOW_USER_ERROR:
-      console.log("show user error reducer");
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload,
       };
 
     // ############ SHOW_USER_RES_CLEAN#########################//

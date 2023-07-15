@@ -54,25 +54,6 @@ function* onLoadUsersStartAsync() {
   }
 }
 
-//===== LOAD USERS2 =====//
-
-function* onLoadUsers2() {
-  yield takeEvery(types.LOAD_USERS_START2, onLoadUsersStartAsync2);
-}
-
-function* onLoadUsersStartAsync2() {
-  try {
-    const response = yield call(loadUsersAPI2);
-    /*  const response = yield axios.get("https://fakestoreapi.com/products"); */
-    console.log(response);
-    if (response.statusText === "") {
-      yield put(loadUsersSuccess2(response.data));
-    }
-  } catch (error) {
-    yield put(loadUsersErorr2(error.response.data));
-  }
-}
-
 //======================================== ShowUser ===============================================//
 
 // function* onShowUser() {
@@ -149,6 +130,27 @@ function* AddToCARTStartSync({ payload }) {
   }
 }
 
+//====================================== MENS CLOTH =============================//
+
+//===== LOAD USERS2 =====//
+
+function* onLoadUsers2() {
+  yield takeEvery(types.LOAD_USERS_START2, onLoadUsersStartAsync2);
+}
+
+function* onLoadUsersStartAsync2() {
+  try {
+    const response = yield call(loadUsersAPI2);
+    /*  const response = yield axios.get("https://fakestoreapi.com/products"); */
+    console.log(response);
+    if (response.statusText === "") {
+      yield put(loadUsersSuccess2(response.data));
+    }
+  } catch (error) {
+    yield put(loadUsersErorr2(error.response.data));
+  }
+}
+
 //======================================== MensCART ===============================================//
 
 function* MensCART() {
@@ -157,8 +159,8 @@ function* MensCART() {
 
 function* MensCARTStartSync({ payload }) {
   try {
-    const response = yield call(AddTOCartAPIShow, payload);
-    console.log(response);
+    const response = yield call(MensCartAPI, payload);
+    console.log("MMMM", response);
     if (response.statusText === "Created") {
       yield put(MensCartSuccess(response.statusText));
       console.log("success", response.statusText);

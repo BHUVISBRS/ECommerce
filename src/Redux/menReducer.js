@@ -11,6 +11,28 @@ const meninitialState = {
 };
 const menReducer = (state = meninitialState, action) => {
   switch (action.type) {
+    // ############ LOAD_USERS_START2#########################//
+
+    case types.LOAD_USERS_START2:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.LOAD_USERS_SUCCESS2:
+      return {
+        ...state,
+        menusers: [...action.payload],
+
+        loading: false,
+      };
+    case types.LOAD_USERS_ERORR2:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    // ############ ADDTO_CART_START#########################//
+
     case types.MEN_CART_START:
       return {
         ...state,
@@ -30,6 +52,7 @@ const menReducer = (state = meninitialState, action) => {
         deleteLoading: false,
         error: [action.payload],
       };
+
     default:
       return state;
   }

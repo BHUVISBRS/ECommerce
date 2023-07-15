@@ -5,6 +5,7 @@ import { loadUsersAPI } from "../Redux/api";
 import {
   AddTOCartStart,
   CartUserResClean,
+  GetCartSTART,
   MensCartStart,
   loadUsersStart,
   loadUsersStart2,
@@ -61,6 +62,7 @@ export default function MensCloth() {
   useEffect(() => {
     console.log("load user");
     dispatch(loadUsersStart2());
+    dispatch(GetCartSTART());
   }, []);
 
   useEffect(() => {
@@ -108,6 +110,7 @@ export default function MensCloth() {
                         aria-label="add to favorites"
                         onClick={() => dispatch(MensCartStart(user))}
                       ></OneButton>
+                      {console.log("users", user)}
                     </CardActions>
                   </Card>
                 </Grid>

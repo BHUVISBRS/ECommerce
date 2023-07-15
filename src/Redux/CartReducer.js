@@ -53,6 +53,28 @@ const CartReducer = (state = initaialState, action) => {
         deleteLoading: false,
       };
 
+    // ############  MENS CLOTH ADD MEN_CART_START#########################//
+
+    case types.MEN_CART_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.MEN_CART_SUCCESS:
+      console.log(action.payload, "reducer");
+      return {
+        ...state,
+        loading: false,
+        response: action.payload,
+      };
+
+    case types.MEN_CART_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: [action.payload],
+      };
+
     // ############ SHOW_USER_RES_CLEAN#########################//
     case types.CARD_USER_RES_CLEAN:
       console.log("show user res clean reducer");

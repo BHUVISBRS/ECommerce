@@ -15,20 +15,6 @@ export const loadUsersErorr = (error) => ({
   type: types.LOAD_USERS_ERORR,
   payload: error,
 });
-//LOAD USER2//
-export const loadUsersStart2 = () => ({
-  type: types.LOAD_USERS_START2,
-});
-
-export const loadUsersSuccess2 = (users) => ({
-  type: types.LOAD_USERS_SUCCESS2,
-  payload: users,
-});
-
-export const loadUsersErorr2 = (error) => ({
-  type: types.LOAD_USERS_ERORR2,
-  payload: error,
-});
 
 //Deleteuser
 
@@ -46,28 +32,14 @@ export const DeleteUserErorr = (error) => ({
   type: types.DELETE_USER_ERROR,
   payload: error,
 });
+//*****showUserResClean*******//
 
-//Showuser
-
-export const showUserStart = (userid) => ({
-  type: types.SHOW_USER_START,
-  payload: userid,
-});
-
-export const showUserSuccess = (user) => ({
-  type: types.SHOW_USER_SUCCESS,
-  payload: user,
-});
-
-export const showUserErorr = (error) => ({
-  type: types.SHOW_USER_ERROR,
-  payload: error,
-});
 export const showUserResClean = (error) => ({
   type: types.SHOW_USER_RES_CLEAN,
   payload: error,
 });
 
+//*****CartUserResClean*******//
 export const CartUserResClean = (error) => ({
   type: types.CARD_USER_RES_CLEAN,
   payload: error,
@@ -107,7 +79,20 @@ export const AddTOCartError = (error) => ({
   type: types.ADDTO_CART_ERROR,
   payload: error,
 });
+//LOAD USER2//
+export const loadUsersStart2 = () => ({
+  type: types.LOAD_USERS_START2,
+});
 
+export const loadUsersSuccess2 = (users) => ({
+  type: types.LOAD_USERS_SUCCESS2,
+  payload: users,
+});
+
+export const loadUsersErorr2 = (error) => ({
+  type: types.LOAD_USERS_ERORR2,
+  payload: error,
+});
 
 //Mens Cart
 

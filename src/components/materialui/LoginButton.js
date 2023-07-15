@@ -10,6 +10,7 @@ const BootstrapButton = styled(Button)({
 
   width: "180px",
   height: "50px",
+  marginRight: "10px",
   padding: "10px 12px",
   border: "1px solid",
   lineHeight: 1.5,
@@ -35,14 +36,11 @@ const BootstrapButton = styled(Button)({
   },
 });
 
-export default function CustomButton() {
+export default function LoginButton() {
   return (
     <Stack spacing={4} direction="row">
       <BootstrapButton variant="contained" disableRipple>
-        BUY
-      </BootstrapButton>
-      <BootstrapButton variant="contained" disableRipple>
-        ADD CART
+        Login
       </BootstrapButton>
     </Stack>
   );
